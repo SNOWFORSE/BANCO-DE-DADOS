@@ -30,3 +30,40 @@ CREATE TABLE associado (
 
 
 select * from associado
+
+
+CREATE TABLE distributors (
+	did serial,
+	name varchar(80),
+	address varchar(100);
+	PRIMARY KEY(did));
+	
+	ALTER TABLE distributors RENAME TO suppliers;
+	DROP TABLE suppliers;
+	
+CREATE TABLE aluno (
+	id SERIAL PRIMARY KEY NOT NULL,
+	name varchar(80) NOT NULL,
+	fone CHAR(14) NOT NULL,
+);
+
+
+//LEMBRAR SEMPRE COLOCAR 'name' POIS FUI IDIOTA DE USAR INGLÊS 
+DML - DATA MANUPULATION LANGUAGE
+
+INSERT INTO aluno(name, fone) VALUES('MARIA DA SILVA', '2222-2222');
+INSERT INTO aluno(name, fone) VALUES('JOÃO DA SILVA', '2222-4444');
+INSERT INTO aluno(name, fone) VALUES('PEDRO DA SILVA', '2222-8888');
+INSERT INTO aluno(fone, name) VALUES('4444-4444', 'MATHEUS DA SILVA');
+
+SELECT * FROM aluno;//seleciona a tabela dml
+
+UPDATE aluno SET name = 'LUCAS DA SILVA' WHERE id = 4;//atualiza uma linha na tabela pelo id
+
+DELETE FROM aluno WHERE ID = 3;//Deleta uma linha da tabela pelo id
+
+SELECT * FROM aluno ORDER BY id ASC; //Reorganiza em sequencia a tabela
+
+DELETE FROM aluno; //Deleta a tabela
+
+INSERT INTO aluno(name, fone) VALUES('MATHEUS DE OLIVEIRA', '9999-9999'),('PEDRO DE OLIVERIA','9999-8888')

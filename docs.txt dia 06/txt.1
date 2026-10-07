@@ -1,0 +1,62 @@
+psql -h localhost -U postgres -p
+
+CREATE DATABASE boladao;
+
+\c boladao
+
+CREATE TABLE aluno (
+	matricula INT PRIMARY KEY,
+	nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE telefone_aluno (
+	id_fone INT PRIMARY KEY,
+	matricula INT,
+	telefone VARCHAR(20),
+	FOREIGN KEY (matricula)
+	REFERENCES aluno(matricula)
+);
+
+SELECT * FROM aluno;
+
+CREATE TABLE disciplina (
+	cod_disciplina VARCHAR(10) PRIMARY KEY,
+	nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE matricula (
+	matricula_aluno INT,
+	cod_disciplina INT,
+	nota DECIMAL(4, 2),
+	PRIMARY KEY (matricula_aluno, cod_disciplina),
+	FOREING KEY (matricula_aluno)
+		REFERENCES aluno(matricula),
+	FOREING KEY (cod_disciplina)
+		REFERENCES disciplina(cod_disciplina)
+);
+
+CREATE TABLE matricula (
+	matricula_aluno INT,
+	cod_disciplina VARCHAR(10),
+	nome_aluno VARCHAR(100),
+	nome_disciplina VARCHAR(100),
+	nota DECIMAL(4, 2),
+	PRIMARY KEY (matricula_aluno, cod_disciplina)
+);
+
+CREATE TABLE aluno (
+	matricula INT PRIMARY KEY,
+	nome VARCHAR(100),
+	cod_curso VARCHAR(10),
+	nome_curso VARCHAR(100)
+);
+
+CREATE TABLE curso (
+	cod_curso INT PRIMARY KEY,
+	nome VARCHAR(100) NOT NULL,
+);
+
+ALTER TABLE aluno ADD COLLUMN cod_curso INT,
+
+ALTER TABLE aluno ADD CONSTRAINT fk_aluno_curso FOREING KEY (cod_curso) REFERENCES curso(cod_curso);
+

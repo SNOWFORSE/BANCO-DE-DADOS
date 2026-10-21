@@ -1,0 +1,25 @@
+\c agenda_academica
+
+1.Adicione à tabela aluno a coluna cidade.
+
+ALTER TABLE aluno ADD COLUMN cidade varchar(30); 
+
+2.Adicione à tabela atividade as colunas carga_horaria (em horas) e vagas. As duas devem aceitar
+apenas valores maiores que zero (CHECK).
+
+ALTER TABLE atividade ADD COLUMN carga_horaria INTEGER CHECK (carga_horaria > 0);
+ALTER TABLE atividade ADD COLUMN vagas INTEGER CHECK (vagas > 0);
+
+3.Adicione à tabela inscricao_atividade as colunas data_inscricao, preenchida automaticamente
+com a data atual (DEFAULT CURRENT_DATE), e frequencia, um percentual de 0 a 100.
+
+ALTER TABLE inscricao_atividade ADD COLUMN data_incricao DATE NOT NULL DEFAUT CURRENT_DATE, ADD COLUMN frequencia NUMERIC(5,2) CHECK (frequencia >= 0 AND frequencia <= 100);
+
+4. OK
+
+5.Preencha com UPDATE:
+•a cidade de todos os alunos, usando pelo menos 3 cidades diferentes;
+•a carga horária e o número de vagas de todas as atividades;
+a frequência de todas as inscrições, com valores variados (alguns abaixo de 75).
+
+SELECT * FROM aluno 

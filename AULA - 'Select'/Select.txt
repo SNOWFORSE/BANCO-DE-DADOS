@@ -1,0 +1,104 @@
+CREATE DATABASE if_pagila;
+
+\c if_pagila
+
+\i pagila-805d1f8d80434893849ebb155e1774bd.sql
+
+#Trocando o nome da coluna 
+
+SELECT 
+	actor_id id, 
+	first_name nome, 
+	last_name sobrenome
+FROM actor;
+
+============================================
+# Concatenando Colunas 
+
+SELECT 
+	actor_id id, 
+	first_name || ' ' || last_name nome
+FROM actor;
+
+ 
+============================================
+
+# Consulta de Filmes
+
+SELECT * FROM films;
+
+SELECT
+	film_id,
+	title
+FROM 
+	film
+ORDER BY
+	2 ASC
+LIMIT 10 OFFSET 10;
+
+============================================
+
+# Consulta + Multiplicação + Arredondamento
+
+SELECT
+	customer_id,
+	amount,
+	amount * 0.7 base,
+	amount * 0.3 profit
+FROM
+	payment;
+
+============================================
+
+# Mostra todos os atributos da tabela ator, com ID <= 10 ou superior ou igual a 190.
+
+SELECT 
+	*
+FROM
+	actor
+WHERE
+	actor_id <= 20 OR
+	actor_id >= 190;
+
+=============================================
+
+SELECT 
+	city_id,
+	city
+FROM 
+	city
+WHERE
+	(city ilike 'sa%' AND
+	city ilike '%S') OR
+	(city ilike 'B%' AND city ilike '%o');
+	
+=============================================
+
+SELECT 
+	city_id,
+	city
+FROM
+	city
+WHERE
+	city_id BETWEEN 1 AND 10;
+	
+=============================================
+
+SELECT 
+	city_id,
+	city
+FROM
+	city
+WHERE
+	city_id IN(2,4,6);
+
+=============================================
+
+SELECT
+	title
+FROM
+	film
+WHERE
+	film_id IN (select film_id from film_actor where actor_id = 1);
+
+=============================================

@@ -102,3 +102,4 @@ WHERE
 	film_id IN (select film_id from film_actor where actor_id = 1);
 
 =============================================
+https://s3.sa-east-1.amazonaws.com/suap-prod/trabalhos/aula1_exercicios_alunos-19813e7ed34a47599038863c1c3f58dd.pdf?AWSAccessKeyId=AKIASFWDS4NOF4NNFMVA&Signature=xe23fzSD%2FB0qbX1cNymlhKyyZoI%3D&Expires=1793830411

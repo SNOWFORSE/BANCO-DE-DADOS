@@ -1,0 +1,107 @@
+Questão 1 - catálogo -
+
+SELECT 
+	title AS titulo,
+	length AS duracao_min,
+	rental_rate AS preco_aluguel
+FROM film
+ORDER BY titulo ASC
+LIMIT 10
+
+Questão 2 - Filmes para Maratona --
+
+SELECT 
+	title AS titulo,
+	length AS duracao_min,
+	round (length / 60.0, 2) AS duracao_horas
+FROM film
+WHERE length >= 184
+ORDER BY duracao_min DESC, title ASC;
+
+Questão 3 - Quanto custa em reais? ---
+
+SELECT 
+	title AS titulo,
+	rental_rate AS preco_dolar,
+	round(rental_rate * 5.50, 2) AS preco_reais
+FROM film
+WHERE rating = 'G' AND length < 50
+ORDER BY rental_rate DESC,
+title ASC;
+
+Questão 4 - Preço por dia ----
+
+SELECT 
+	title AS titulo,
+	rental_rate AS preco,
+	rental_duration AS dias,
+	round(rental_rate / rental_duration, 2) AS preco_por_dia
+FROM film
+WHERE film_id BETWEEN 1 AND 10
+ORDER BY rental_rate / rental_duration DESC,
+title ASC;
+
+Questão 5 - Quantos aluguéis para pagar o filme? -----
+
+SELECT 
+	title AS titulo,
+	replacement_cost AS custo_reposicao,
+	rental_rate AS preco_aluguel,
+	CEIL(replacement_cost / rental_rate) AS alugueis_para_pagar
+FROM film
+WHERE film_id BETWEEN 1 AND 10
+ORDER BY CEIL(replacement_cost / rental_rate) DESC,
+title ASC;
+Questão 6 — Página 2 do site ------
+
+SELECT 
+	film_id AS codigo,
+	title AS titulo 
+FROM film
+ORDER BY title
+LIMIT 10;
+
+Questão 7 — O relógio do filme -------
+
+SELECT 
+	title AS titulo,
+	length AS duracao_min,
+	FLOOR(length / 60) AS horas,
+	MOD(length, 60) AS minutos
+FROM film
+WHERE length < 50
+ORDER BY length,
+title ASC;
+
+Questão 8 — Clientes sumidos ---------
+
+SELECT 
+	first_name AS nome,
+	last_name AS sobrenome, email
+FROM customer
+WHERE store_id = 2 AND active = 0
+ORDER BY last_name;
+
+Questão 9 — Promoção de 10% ----------
+
+SELECT
+	payment_id AS pagamento,
+	customer_id AS cliente,
+	amount AS valor,
+	ROUND(amount * 0.90, 2) AS valor_com_desconto
+FROM payment
+WHERE amount > 10
+ORDER BY amount DESC, payment_id
+LIMIT 5;
+
+
+
+Questão 10 — Desafio: o pódio estendido -----------
+
+SELECT
+	title AS titulo,
+	length AS duracao_min
+FROM film
+ORDER BY length DESC,
+title ASC
+LIMIT 3 OFFSET 2;

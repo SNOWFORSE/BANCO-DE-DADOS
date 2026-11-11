@@ -1,0 +1,109 @@
+SELECT 
+  actor.actor_id,
+  first_name || ' ' || last_name fullname,
+  film.film_id,
+  title
+FROM 
+  actor
+INNER JOIN film_actor ON
+film_actor.actor_id = actor.actor_id
+INNER JOIN film ON
+film.film_id = film_actor.film_id WHERE actor.actor_id = 1
+ORDER BY film_id ASC, first_name ASC;
+
+-------------------------------------------------------------
+//mais dificil 
+SELECT
+	category.category_id,
+	name,
+	film.film_id,
+	title
+FROM
+	category
+INNER JOIN film_category ON
+film_category.category_id = category.category_id
+INNER JOIN film ON
+film.film_id = film_category.film_id 
+ORDER BY category_id ASC, name ASC;
+
+-------------------------------------------------------------
+//mais facil
+SELECT
+	category_id,
+	title,
+	film_id,
+	name
+FROM
+	category
+INNER JOIN film_category USING (category_id)
+INNER JOIN film USING (film_id) 
+ORDER BY name ASC, category_id ASC;
+
+--------------------------------------------------------------
+
+SELECT 
+	film_id,
+	COUNT (film_id)
+FROM
+	inventory
+GROUP BY film_id
+order BY film_id ASC;
+
+--------------------------------------------------------------
+SELECT 
+	film_id,
+	title,
+	COUNT (film_id)
+FROM
+	inventory
+INNER JOIN film USING(film_id)
+GROUP BY film_id
+order BY film_id ASC;
+
+---------------------------------------------------------------
+
+SELECT 
+	inventory_id,
+	film_id,
+	title,
+	category_id,
+	name,
+	amount
+FROM
+	inventory
+INNER JOIN film USING(film_id)
+INNER JOIN film_category USING(film_id)
+INNER JOIN category USING(category_id)
+order BY film_id ASC;
+
+--------------------------------------------------------------
+
+SELECT 
+	category_id,
+	name,
+	SUM(amount)
+FROM
+	inventory
+INNER JOIN film USING(film_id)
+INNER JOIN film_category USING(film_id)
+INNER JOIN category USING(category_id)
+INNER JOIN rental USING(inventory_id)
+INNER JOIN payment USING(rental_id)
+GROUP BY category_id
+ORDER BY SUM(amount) DESC
+LIMIT 3;
+	
+
+--------------------------------------------------------
+SELECT 
+	SUM(amount)
+FROM
+	inventory
+INNER JOIN film USING(film_id)
+INNER JOIN film_category USING(film_id)
+INNER JOIN category USING(category_id)
+INNER JOIN rental USING(inventory_id)
+INNER JOIN payment USING(rental_id)
+GROUP BY film_id
+ORDER BY 1 DESC
+LIMIT 10;
